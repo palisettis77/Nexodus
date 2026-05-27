@@ -1,9 +1,15 @@
 import os
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, jsonify
 
 app = Flask(__name__)
-
 BASE = os.path.dirname(os.path.abspath(__file__))
+
+@app.route('/debug')
+def debug():
+    return jsonify({
+        'base': BASE,
+        'files': os.listdir(BASE)
+    })
 
 @app.route('/')
 def home():
