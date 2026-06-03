@@ -37,7 +37,7 @@ nav{
   backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
 }
-.logo{font-size:1.2rem;font-weight:800;letter-spacing:-0.3px;}
+.logo{font-size:1.6rem;font-weight:800;letter-spacing:-0.3px;}
 .logo em{color:var(--accent);font-style:normal;}
 .nav-links{display:flex;gap:1.8rem;list-style:none;}
 .nav-links a{font-size:0.82rem;font-weight:500;color:var(--muted);transition:color 0.2s;}
@@ -368,7 +368,7 @@ footer{
     <li><a href="#careers">Careers</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a href="contact.html" class="nav-btn">Free Consultation →</a>
+  <a href="#contact" class="nav-btn">Free Consultation →</a>
 </nav>
 
 <!-- HERO -->
@@ -380,7 +380,7 @@ footer{
   <h1>Your <i>US Tech Career</i><br/>Starts Here</h1>
   <p class="hero-desc">Sonoma Staffing Group connects international students on OPT &amp; STEM OPT with full-time opportunities at top US companies — through expert training, career coaching, and dedicated placement support.</p>
   <div class="hero-actions">
-    <a href="contact.html" class="btn-main">Start Your Journey →</a>
+    <a href="#contact" class="btn-main">Start Your Journey →</a>
     <a href="#services" class="btn-ghost">Explore Services</a>
   </div>
   <div class="stats">
@@ -560,6 +560,83 @@ function submitCareers() {
   <a href="contact.html" class="btn-main">Book a Free Consultation →</a>
 </section>
 
+<!-- CONTACT / FREE CONSULTATION -->
+<section class="section section-alt" id="contact">
+  <div class="tag">/ Free Consultation</div>
+  <div class="section-head">Book Your Free<br/>15-Minute Call</div>
+  <p class="section-desc">Fill in your details and we will get back to you within 24 hours.</p>
+  <div style="max-width:560px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;">
+    <div id="contact-msg" style="display:none;border-radius:8px;padding:1rem;margin-bottom:1rem;font-size:.875rem;"></div>
+    <div style="display:flex;flex-direction:column;gap:1rem;">
+      <div>
+        <label style="font-size:.8rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.4rem;">Full Name *</label>
+        <input id="con-name" type="text" placeholder="Your full name" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.6rem .9rem;color:var(--text);font-size:.875rem;outline:none;"/>
+      </div>
+      <div>
+        <label style="font-size:.8rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.4rem;">Email Address *</label>
+        <input id="con-email" type="email" placeholder="your@email.com" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.6rem .9rem;color:var(--text);font-size:.875rem;outline:none;"/>
+      </div>
+      <div>
+        <label style="font-size:.8rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.4rem;">Phone Number</label>
+        <input id="con-phone" type="tel" placeholder="+1 (xxx) xxx-xxxx" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.6rem .9rem;color:var(--text);font-size:.875rem;outline:none;"/>
+      </div>
+      <div>
+        <label style="font-size:.8rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.4rem;">OPT Status *</label>
+        <select id="con-status" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.6rem .9rem;color:var(--text);font-size:.875rem;outline:none;">
+          <option value="">Select your status</option>
+          <option>OPT</option>
+          <option>STEM OPT</option>
+          <option>CPT</option>
+          <option>H1B</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:.8rem;font-weight:600;color:var(--muted);display:block;margin-bottom:.4rem;">Your Message *</label>
+        <textarea id="con-msg" placeholder="Tell us about your situation and what help you need..." style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.6rem .9rem;color:var(--text);font-size:.875rem;outline:none;height:100px;resize:vertical;"></textarea>
+      </div>
+      <button onclick="submitConsultation()" style="background:linear-gradient(135deg,#4F8EF7,#7C3AED);color:#fff;border:none;border-radius:9px;padding:.75rem;font-size:.875rem;font-weight:700;cursor:pointer;transition:opacity .2s;">Book Free Consultation →</button>
+      <p style="font-size:.75rem;color:var(--muted);text-align:center;">Free · No obligation · We reply within 24 hours</p>
+    </div>
+  </div>
+</section>
+
+<script>
+function submitConsultation() {
+  const name   = document.getElementById('con-name').value.trim();
+  const email  = document.getElementById('con-email').value.trim();
+  const status = document.getElementById('con-status').value;
+  const msg    = document.getElementById('con-msg').value.trim();
+  const msgEl  = document.getElementById('contact-msg');
+
+  if (!name || !email || !status || !msg) {
+    msgEl.style.display = 'block';
+    msgEl.style.background = 'rgba(239,68,68,0.1)';
+    msgEl.style.border = '1px solid rgba(239,68,68,0.3)';
+    msgEl.style.color = '#ef4444';
+    msgEl.textContent = 'Please fill in all required fields.';
+    return;
+  }
+
+  // Send email via mailto
+  const subject = encodeURIComponent('Free Consultation Request - ' + name);
+  const body = encodeURIComponent(
+    'Name: ' + name + '\n' +
+    'Email: ' + email + '\n' +
+    'Phone: ' + document.getElementById('con-phone').value + '\n' +
+    'OPT Status: ' + status + '\n\n' +
+    'Message:\n' + msg
+  );
+  window.location.href = 'mailto:info@sonomastaffinggroup.com?subject=' + subject + '&body=' + body;
+
+  msgEl.style.display = 'block';
+  msgEl.style.background = 'rgba(16,185,129,0.1)';
+  msgEl.style.border = '1px solid rgba(16,185,129,0.3)';
+  msgEl.style.color = '#10B981';
+  msgEl.textContent = '✅ Thank you! Your email client will open to send your message. We will reply within 24 hours.';
+}
+</script>
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
@@ -568,7 +645,7 @@ function submitCareers() {
       <p>Empowering international students on OPT &amp; STEM OPT to build successful careers in the USA through expert training, placement, and career coaching.</p>
       <div class="fcontact">
         <div>📞 <a href="tel:+14155550192">415-555-0192</a></div>
-        <div>✉ <a href="mailto:info@nexodustechnologies.com">info@nexodustechnologies.com</a></div>
+        <div>✉ <a href="mailto:info@sonomastaffinggroup.com">info@sonomastaffinggroup.com</a></div>
         <div>📍 Sonoma, California, USA</div>
       </div>
     </div>
