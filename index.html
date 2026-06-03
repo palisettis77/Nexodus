@@ -366,9 +366,50 @@ footer{
     <li><a href="#process">Process</a></li>
     <li><a href="#testimonials">Success Stories</a></li>
     <li><a href="#careers">Careers</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="#contact-info" onclick="toggleContact(event)">Contact</a></li>
   </ul>
   <a href="#contact" class="nav-btn">Free Consultation →</a>
+
+<!-- Contact Popup -->
+<div id="contact-popup" style="display:none;position:fixed;top:64px;right:2rem;z-index:200;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;min-width:280px;box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+    <span style="font-size:.85rem;font-weight:700;">Contact Us</span>
+    <button onclick="document.getElementById('contact-popup').style.display='none'" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.1rem;">✕</button>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:.75rem;">
+    <a href="tel:+14155550192" style="display:flex;align-items:center;gap:.75rem;padding:.75rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);transition:border-color .2s;">
+      <span style="width:36px;height:36px;background:rgba(79,142,247,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;">📞</span>
+      <div>
+        <div style="font-size:.75rem;color:var(--muted);font-weight:500;">Call Us</div>
+        <div style="font-size:.875rem;font-weight:700;color:var(--accent);">415-555-0192</div>
+      </div>
+    </a>
+    <a href="mailto:info@sonomastaffinggroup.com" style="display:flex;align-items:center;gap:.75rem;padding:.75rem;background:var(--bg);border:1px solid var(--border);border-radius:10px;text-decoration:none;color:var(--text);transition:border-color .2s;">
+      <span style="width:36px;height:36px;background:rgba(124,58,237,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;">✉️</span>
+      <div>
+        <div style="font-size:.75rem;color:var(--muted);font-weight:500;">Email Us</div>
+        <div style="font-size:.875rem;font-weight:700;color:var(--accent);">info@sonomastaffinggroup.com</div>
+      </div>
+    </a>
+    <a href="#contact" onclick="document.getElementById('contact-popup').style.display='none'" style="display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.75rem;background:linear-gradient(135deg,#4F8EF7,#7C3AED);border-radius:10px;text-decoration:none;color:#fff;font-size:.8rem;font-weight:700;">
+      📅 Book Free Consultation
+    </a>
+  </div>
+</div>
+
+<script>
+function toggleContact(e) {
+  e.preventDefault();
+  const popup = document.getElementById('contact-popup');
+  popup.style.display = popup.style.display === 'none' ? 'block' : 'none';
+}
+document.addEventListener('click', function(e) {
+  const popup = document.getElementById('contact-popup');
+  if (!popup.contains(e.target) && !e.target.closest('a[onclick*="toggleContact"]')) {
+    popup.style.display = 'none';
+  }
+});
+</script>
 </nav>
 
 <!-- HERO -->
